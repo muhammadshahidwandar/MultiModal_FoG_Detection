@@ -1,70 +1,46 @@
-# Hand Trajectory prediction from ECoG signal using Partial Least Square Regression(PLS) and Higher Order PLS
-# Tensorflow Code for the paper: 
-*[S-VVAD: Visual Voice Activity Detection by Motion Segmentation](Link)
+# Freezing of Gait detection in Parkinson’s Disease using multi-modal data (EEG, EMG, IMU and Skin Conductance) 
+# Temporal 3-Layer Resnet model using Pytorch: 
 
 ## Overview
 ![BlockDiagram](https://github.com/muhammadshahidwandar/MultiModal_FoG_Detection/blob/main/images/Fog_Main_Block.jpg)
 
 ![ResultsIMU](https://github.com/muhammadshahidwandar/MultiModal_FoG_Detection/blob/main/images/IMU_FoG_detection.jpg)
+FoG detection using IMU multivariate signal
 
 ![ResultsEMG](https://github.com/muhammadshahidwandar/MultiModal_FoG_Detection/blob/main/images/EMG_FoG_detection.jpg)
-The Method consist of following steps as shown in figure above
-
-1. Training a ResNet50 model with the pre-trained weights used for network initialization. Any framework such as tensorflow, pytorch or Caffe can be used. We used code from (RealVAD)(https://github.com/muhammadshahidwandar/Visual-VAD-Unsupervised-Domain-Adaptation) for this step.  
-
-2. Class activation map generation using Gradient-CAM for Voice Activity Detection (VAD) labels: 0: not-speaking, 1: speaking. We used code from (https://github.com/insikk/Grad-CAM-tensorflow).
-
-3. VAD-motion-cues-based mask generation.
- 
-4. Fully Convolution Network (FCN) training using VAD-cues' generated Masks in step 3.
-
-5. Testing Fully Convolution Network (FCN)  using test dynamic images and saving those masks.
-
-6. Bounding Box Generation around speaking and notspeaking segmented Cues. We used from (https://scikit-learn.org/stable/modules/generated/sklearn.cluster.AffinityPropagation.html) for this step.
-
+FoG detection using EMG multivariate signal
 ## Sub-directories and Files
-There are four sub-directories described as follows:
+There are two sub-directories described as follows::
 
 ### images
-Containes over all training block diagram and some sample images of intermediate stages such as CAMs for speaking and not-speaking overlayed on Dynamic image and Raw CAMs as well, mask generation images.
+Containes over all block diagram and visual results of predicted signal.
+### source
+Contains source code for data read functions, multivariate signal preprocessing utilities, and a 3-layer temporal ResNet model for classification.
 
-### VAD-Mask-Generation
-Containes some sample train and validation set for RealVAD dataset as explained in S-VVAD paper.  
-
-### FCN-Training
-
-``FCN_Train_Main``: To train Fully Convolutional ResNet-50 model on a given dataset 
-
-``resnet_fcn.py``: Resnet-based FCN model defienation 
-
-``datageneratorRealVAD.py``: Image batch generator with segmentation mask and BB from each Image
-
-``datageneratorTest.py``: Sequential image batch generator with only BB annoation
-### FCN-Testing
-``TestFCN_Main``: To Reload and test the trained FCN model on a test set and saving the generated masks
-``datageneratorTest.py``: Test image batch geneartor 
-
-Some pre-trained ResNet50 model for tensorflow can be downloaded from this link (https://drive.google.com/drive/folders/1dHYOMuzXHL46P1zDgDyDj9NgYzV1nNSS?usp=sharing)
 
 ## Dependencies
-* Python 3.5
-* Tensorflow 1.12
-* Opencv 3.0
-* Natsort 7.0.1
-* scipy  0.16.0
+* python 3.7
+* pandas 2.0.2
+* torch 1.13.0 
+* scipy  1.9.3
 
 
-## How it works
-1- Obtain your target datasets e.g.  RealVAD Dataset (https://github.com/IIT-PAVIS/Voice-Activity-Detection)
+## Dataset
+The data is downloaded from the link [https://data.mendeley.com/datasets/r8gmbtv7w2/3], which is referenced in the paper.
 
-2- Generate and save the dynamic image by using (https://github.com/hbilen/dynamic-image-nets) 
-
-3- Define your training and test folds in the text files (example files given as trainRealVAD1.txt and testRealVAD1.txt in ValidationFold sub-directory)
-
-4- Change paths and parameters in FCN_Train_Main.py to train ResNet model
-
-5- Test model on test set by using Model_Evaluation.py and BB projection on speaking Notspeaking segmentated.
 
 
 ## Reference
 
+**Multimodal Data for the Detection of Freezing of Gait in Parkinson’s Disease**  
+```
+@article{zhang2022multimodal,
+  title={Multimodal Data for the Detection of Freezing of Gait in Parkinson’s Disease},
+  author={Zhang, Wei and Yang, Zhuokun and Li, Hantao and Huang, Debin and Wang, Lipeng and Wei, Yanzhao and Zhang, Lei and Ma, Lin and Feng, Huanhuan and Pan, Jing and others},
+  journal={Scientific Data},
+  volume={9},
+  number={1},
+  pages={606},
+  year={2022},
+  publisher={Nature Publishing Group UK London}
+}
