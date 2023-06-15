@@ -5,9 +5,11 @@
 ![BlockDiagram](https://github.com/muhammadshahidwandar/MultiModal_FoG_Detection/blob/main/images/Fog_Main_Block.jpg)
 
 ![ResultsIMU](https://github.com/muhammadshahidwandar/MultiModal_FoG_Detection/blob/main/images/IMU_FoG_detection.jpg)
+
 FoG detection using IMU multivariate signal
 
 ![ResultsEMG](https://github.com/muhammadshahidwandar/MultiModal_FoG_Detection/blob/main/images/EMG_FoG_detection.jpg)
+
 FoG detection using EMG multivariate signal
 ## Sub-directories and Files
 There are two sub-directories described as follows::
